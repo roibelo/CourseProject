@@ -5,7 +5,7 @@ import signal
 from flask import Flask
 import requests
 
-from Dal import db_connector
+#from Dal import db_connector
 
 app = Flask(__name__)
 
@@ -13,6 +13,7 @@ app = Flask(__name__)
 @app.route("/users/get_user_data/<user_id>")
 def get_user_data(user_id):
     try:
+        from Dal import db_connector
         user_name = db_connector.get_user_name(user_id)
         if user_name != "":
             return "<H1 id='user'>" + user_name[0] + "</H1>"
@@ -27,6 +28,7 @@ def get_user_data(user_id):
 def post_user_data(user_id):
 
     try:
+        from Dal import db_connector
         user_name = db_connector.insert_user(user_id, "Roi")
         if user_name != "":
             return "<H1 id='user'>user: " + user_name + " as inserted</H1>"
@@ -41,6 +43,7 @@ def post_user_data(user_id):
 def update_user_data(user_id):
 
     try:
+        from Dal import db_connector
         user_name = db_connector.update_user(user_id, "Dasi")
         if user_name != "":
             return "<H1 id='user'>user id: " + user_id + " updated with the name " + user_name + "</H1>"
@@ -55,6 +58,7 @@ def update_user_data(user_id):
 def delete_user_data(user_id):
 
     try:
+        from Dal import db_connector
         db_connector.delete_user(user_id)
         return "<H1 id='user'>user id: " + user_id + " was deleted</H1>"
     except Exception as ex:

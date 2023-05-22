@@ -31,6 +31,7 @@ def get_user_name(user_id):
     try:
         # Establishing a connection to DB
         conn = get_db_connection()
+        cursor = conn.cursor()
         cursor.execute("SELECT u.user_name FROM sql8618285.users as u where u.user_id=" + user_id + ";")
         for row in cursor:
             user_name = row

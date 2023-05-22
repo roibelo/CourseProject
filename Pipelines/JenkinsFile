@@ -13,9 +13,9 @@ pipeline {
             steps {
                 script {
                      if (checkOs() == 'Windows') {
-                        bat 'python Backend/rest_app.py'
+                        bat 'start/min python Backend/rest_app.py'
                     } else {
-                        sh 'python Backend/rest_app.py'
+                        sh 'nohup python Backend/rest_app.py'
                     }
                 }
             }
@@ -24,9 +24,9 @@ pipeline {
             steps {
                 script {
                      if (checkOs() == 'Windows') {
-                        bat 'python Web/web_app.py'
+                        bat 'start/min python Web/web_app.py'
                     } else {
-                        sh 'python Web/web_app.py'
+                        sh 'nohup python Web/web_app.py'
                     }
                 }
             }

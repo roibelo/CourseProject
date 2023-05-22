@@ -9,16 +9,69 @@ pipeline {
                 git 'https://github.com/roibelo/CourseProject.git'
             }
         }
-        stage('run python') {
+        stage('Run rest_app.py') {
             steps {
                 script {
-                    print("GOOD")
-                    print("OK")
-                    /* if (checkOs() == 'Windows') {
-                        bat 'python 1.py'
+                     if (checkOs() == 'Windows') {
+                        bat 'python Backend/rest_app.py'
                     } else {
-                        sh 'python 1.py'
-                    } */
+                        sh 'python Backend/rest_app.py'
+                    }
+                }
+            }
+        }
+        stage('Run web_app.py') {
+            steps {
+                script {
+                     if (checkOs() == 'Windows') {
+                        bat 'python Web/web_app.py'
+                    } else {
+                        sh 'python Web/web_app.py'
+                    }
+                }
+            }
+        }
+        stage('Run backend_testing.py') {
+            steps {
+                script {
+                     if (checkOs() == 'Windows') {
+                        bat 'python Test/backend_testing.py'
+                    } else {
+                        sh 'python Test/backend_testing.py'
+                    }
+                }
+            }
+        }
+        stage('Run frontend_testing.py') {
+            steps {
+                script {
+                     if (checkOs() == 'Windows') {
+                        bat 'python Test/frontend_testing.py'
+                    } else {
+                        sh 'python Test/frontend_testing.py'
+                    }
+                }
+            }
+        }
+        stage('Run combined_testing.py') {
+            steps {
+                script {
+                     if (checkOs() == 'Windows') {
+                        bat 'python Test/combined_testing.py'
+                    } else {
+                        sh 'python Test/combined_testing.py'
+                    }
+                }
+            }
+        }
+        stage('Run clean_environment.py') {
+            steps {
+                script {
+                     if (checkOs() == 'Windows') {
+                        bat 'python clean_environment.py'
+                    } else {
+                        sh 'python clean_environment.py'
+                    }
                 }
             }
         }

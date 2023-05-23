@@ -1,6 +1,5 @@
 import os
 import signal
-from aifc import Error
 from flask import Flask, request
 #from Dal import db_connector
 
@@ -58,4 +57,5 @@ def stop_server():
     return 'Server stopped'
 
 
-app.run(host='127.0.0.1', debug=True, port=5000)
+#app.run(host='127.0.0.1', debug=True, port=5000)
+os.kill(os.getpid(), signal.CTRL_C_EVENT)

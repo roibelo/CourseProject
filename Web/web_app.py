@@ -1,9 +1,6 @@
-import json
 import os
 import signal
-
 from flask import Flask
-import requests
 
 #from Dal import db_connector
 

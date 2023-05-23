@@ -16,7 +16,6 @@ pipeline {
                     bat 'pip install requests'
                     bat 'pip install selenium'
                     bat 'pip install chromedriver-binary'
-                    bat 'pip install By'*/
                 }
             }
         }

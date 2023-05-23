@@ -8,6 +8,8 @@ app = Flask(__name__)
 # local users storage
 users = {}
 # supported methods
+
+
 @app.route('/users/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def user(user_id):
     if request.method == 'GET':
@@ -57,5 +59,5 @@ def stop_server():
     return 'Server stopped'
 
 
-#app.run(host='127.0.0.1', debug=True, port=5000)
+app.run(host='127.0.0.1', debug=True, port=5000)
 os.kill(os.getpid(), signal.CTRL_C_EVENT)

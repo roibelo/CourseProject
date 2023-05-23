@@ -4,7 +4,7 @@ pipeline {
         stage('Pull code') {
             steps {
                 script {
-                    properties([pipelineTriggers([pollSCM('* * * * *')])])
+                    properties([pipelineTriggers([pollSCM('H/10 * * * *')])])
                 }
                 git 'https://github.com/roibelo/CourseProject.git'
             }

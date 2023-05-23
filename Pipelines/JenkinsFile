@@ -14,7 +14,7 @@ pipeline {
                 script {
                     // Install requests module
                     bat 'pip install requests'
-                    /*8bat 'pip install webdriver'*/
+                    /*bat 'pip install webdriver'*/
                     bat 'pip install Service'
                     bat 'pip install By'
                 }

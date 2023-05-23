@@ -9,6 +9,17 @@ pipeline {
                 git 'https://github.com/roibelo/CourseProject.git'
             }
         }
+        stage('Install dependencies') {
+            steps {
+                script {
+                    // Install requests module
+                    bat 'pip install requests'
+                    bat 'pip install webdriver'
+                    bat 'pip install Service'
+                    bat 'pip install By'
+                }
+            }
+        }
         stage('Run rest_app.py') {
             steps {
                 script {

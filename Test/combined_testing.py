@@ -49,6 +49,6 @@ def do_selenium_request(user_id):
         driver.quit()
 
 
-do_post_request(1)
-#do_get_request(1)
-#do_selenium_request(1)
+#do_post_request(1)
+do_get_request(1)
+do_selenium_request(1)

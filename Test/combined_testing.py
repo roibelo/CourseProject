@@ -14,7 +14,7 @@ def do_post_request(user_id):
         else:
             raise Exception("test failed")
     except Exception as ex:
-        raise Exception("test failed")
+        raise Exception("test failed:" + ex.__str__())
 
 
 def do_get_request(user_id):

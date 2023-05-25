@@ -17,6 +17,7 @@ pipeline {
                     bat 'pip install selenium'
                     bat 'pip install chromedriver-binary'
                     bat 'pip install pymysql'
+                    bat 'pip install datetime'
                 }
             }
         }

@@ -84,11 +84,6 @@ pipeline {
             }
         }
         stage('Run combined_testing.py') {
-            when {
-                expression {
-                    false
-                }
-            }
             steps {
                 script {
                      if (checkOs() == 'Windows') {

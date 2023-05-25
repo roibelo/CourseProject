@@ -12,7 +12,7 @@ def do_post_request(user_id):
             data = res.json()
             print("user " + data["user_added"] + " has been added")
         else:
-            raise Exception("test failed")
+            raise Exception("test failed  " + str(res))
     except Exception as ex:
         raise Exception("test failed:" + ex.__str__())
 
@@ -49,6 +49,6 @@ def do_selenium_request(user_id):
         driver.quit()
 
 
-do_post_request(5)
-do_get_request(5)
-do_selenium_request(5)
+do_post_request(6)
+do_get_request(6)
+do_selenium_request(6)

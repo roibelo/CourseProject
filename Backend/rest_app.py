@@ -32,7 +32,7 @@ def user(user_id):
             user_name = db_connector.insert_user(user_id, user_name)
             return {'status': 'ok', 'user_added': user_name}, 200  # status code
         except Exception as ex:
-            return {'status': 'error', 'reason': 'id already exists'}, 500  # status code
+            return {'status': 'error', 'reason': 'id already exists ' + ex.__str__()}, 500  # status code
 
     elif request.method == 'PUT':
         try:

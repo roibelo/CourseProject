@@ -4,7 +4,7 @@ pipeline {
         stage('Pull code') {
             steps {
                 script {
-                    properties([pipelineTriggers([pollSCM('H/10 * * * *')])])
+                    properties([pipelineTriggers([pollSCM('H/30 * * * *')])])
                 }
                 git 'https://github.com/roibelo/CourseProject.git'
             }
@@ -12,19 +12,27 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 script {
-                    // Install requests module
-                    bat 'pip install requests'
-                    bat 'pip install selenium'
-                    bat 'pip install chromedriver-binary'
-                    bat 'pip install pymysql'
-                    bat 'pip install datetime'
+                    // Install modules
+                    if (checkOs() == 'Windows') {
+                        bat 'pip install requests'
+                        bat 'pip install selenium'
+                        bat 'pip install chromedriver-binary'
+                        bat 'pip install pymysql'
+                        bat 'pip install datetime'
+                    } else {
+                        sh 'pip install requests'
+                        sh 'pip install selenium'
+                        sh 'pip install chromedriver-binary'
+                        sh 'pip install pymysql'
+                        sh 'pip install datetime'
+                    }
                 }
             }
         }
         stage('Run rest_app.py') {
             steps {
                 script {
-                     if (checkOs() == 'Windows') {
+                    if (checkOs() == 'Windows') {
                         bat 'start/min python Backend/rest_app.py'
                     } else {
                         sh 'nohup python Backend/rest_app.py'

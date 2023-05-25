@@ -44,11 +44,6 @@ pipeline {
             }
         }
         stage('Run backend_testing.py') {
-            when {
-                expression {
-                    false
-                }
-            }
             steps {
                 script {
                      if (checkOs() == 'Windows') {
@@ -60,11 +55,6 @@ pipeline {
             }
         }
         stage('Run frontend_testing.py') {
-            when {
-                expression {
-                    false
-                }
-            }
             steps {
                 script {
                      if (checkOs() == 'Windows') {
@@ -101,7 +91,7 @@ pipeline {
 }
 
 def checkOs(){
-    /*if (isUnix()) {
+    if (isUnix()) {
         def uname = sh script: 'uname', returnStdout: true
         if (uname.startsWith("Darwin")) {
             return "Macos"
@@ -112,6 +102,5 @@ def checkOs(){
     }
     else {
         return "Windows"
-    }*/
-    return "Windows"
+    }
 }

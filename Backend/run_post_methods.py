@@ -54,8 +54,8 @@ def do_delete_request(user_id):
 
 
 #do_post_request(123456)
-do_get_request(12345)
+#do_get_request(12345)
 #do_update_request(123456)
 #do_get_request(123456)
-do_delete_request(12345)
-do_get_request(12345)
+#do_delete_request(12345)
+#do_get_request(12345)

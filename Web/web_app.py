@@ -26,7 +26,7 @@ def post_user_data(user_id):
 
     try:
         from Dal import db_connector
-        user_name = db_connector.insert_user(user_id, "Roi")
+        user_name = db_connector.insert_user(user_id, "John")
         if user_name != "":
             return "<H1 id='user'>user: " + user_name + " as inserted</H1>"
         else:
@@ -41,7 +41,7 @@ def update_user_data(user_id):
 
     try:
         from Dal import db_connector
-        user_name = db_connector.update_user(user_id, "Dasi")
+        user_name = db_connector.update_user(user_id, "Roi")
         if user_name != "":
             return "<H1 id='user'>user id: " + user_id + " updated with the name " + user_name + "</H1>"
         else:

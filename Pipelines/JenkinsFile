@@ -42,6 +42,9 @@ pipeline {
             }
         }
         stage('Run backend_testing.py') {
+            options {
+                    disableConcurrentBuilds()
+            }
             steps {
                 script {
                      if (checkOs() == 'Windows') {
@@ -53,6 +56,9 @@ pipeline {
             }
         }
         stage('Run frontend_testing.py') {
+            options {
+                disableConcurrentBuilds()
+            }
             steps {
                 script {
                      if (checkOs() == 'Windows') {

@@ -30,7 +30,7 @@ def do_get_request(user_id):
         else:
             raise Exception("test failed")
     except Exception as ex:
-        raise Exception("test failed")
+        raise Exception("test failed " + ex.__str__())
 
 
 def do_selenium_request(user_id):
@@ -44,11 +44,11 @@ def do_selenium_request(user_id):
         else:
             raise Exception("test failed")
     except Exception as ex:
-        raise Exception("test failed")
+        raise Exception("test failed " + ex.__str__())
     finally:
         driver.quit()
 
 
-do_post_request(6)
-do_get_request(6)
-do_selenium_request(6)
+do_post_request(1)
+do_get_request(1)
+do_selenium_request(1)

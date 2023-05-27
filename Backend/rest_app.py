@@ -1,12 +1,16 @@
 import os
 import signal
 from flask import Flask, request
-#from Dal import db_connector
+import sys
+sys.path.append('/Dal')
+# from Dal import db_connector
 
 app = Flask(__name__)
 
 # local users storage
 users = {}
+
+
 # supported methods
 
 

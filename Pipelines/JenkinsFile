@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Set PYTHONPATH') {
             steps {
-                bat 'export PYTHONPATH=$WORKSPACE/CourseProject:$PYTHONPATH'
+                bat 'set PYTHONPATH=%WORKSPACE%\\CourseProject;%PYTHONPATH%'
             }
         }
         stage('Install dependencies') {

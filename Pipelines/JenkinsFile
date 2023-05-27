@@ -9,6 +9,11 @@ pipeline {
                 git 'https://github.com/roibelo/CourseProject.git'
             }
         }
+        stage('Set PYTHONPATH') {
+            steps {
+                bat 'export PYTHONPATH=$WORKSPACE/CourseProject:$PYTHONPATH'
+            }
+        }
         stage('Install dependencies') {
             steps {
                 script {

@@ -3,7 +3,7 @@ import requests
 
 def do_post_request(user_id):
     try:
-        url = "http://127.0.0.1:6000/users/" + str(user_id)
+        url = "http://127.0.0.1:5000/users/" + str(user_id)
         res = requests.post(url, json={"user_name": "John"})
         if res.ok:
             data = res.json()
@@ -17,7 +17,7 @@ def do_post_request(user_id):
 
 def do_get_request(user_id):
     try:
-        url = "http://127.0.0.1:6000/users/" + str(user_id)
+        url = "http://127.0.0.1:5000/users/" + str(user_id)
         res = requests.get(url)
         if res.ok and res.status_code == 200:
             data = res.json()

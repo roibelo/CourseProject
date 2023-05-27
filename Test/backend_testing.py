@@ -31,5 +31,5 @@ def do_get_request(user_id):
         print("<H1 id='error'>error: " + ex.__str__() + "</H1>")
 
 
-do_post_request(1)
-do_get_request(1)
+do_post_request(1000)
+do_get_request(1000)

@@ -49,19 +49,19 @@ def get_user_name(user_id):
 def insert_user(user_id, user_name):
     try:
         # Establishing a connection to DB
-        conn = get_db_connection()
+        #conn = get_db_connection()
         # Getting a cursor from Database
-        cursor = conn.cursor()
+        #cursor = conn.cursor()
         # Inserting data into table
-        cursor.execute(
-            "INSERT into sql8618285.users (user_id, user_name, creation_date) VALUES (" + user_id + ", '" + user_name +
-            "','" + str(datetime.datetime.now()) + "')")
-
+        # cursor.execute(
+        #      "INSERT into sql8618285.users (user_id, user_name, creation_date) VALUES (" + user_id + ", '" + user_name +
+        #      "','" + str(datetime.datetime.now()) + "')")
+        return user_name
     except Exception as ex:
         raise Exception("insertUser function error: " + ex.__str__())
-    finally:
-        cursor.close()
-        conn.close()
+    #finally:
+        #cursor.close()
+        #conn.close()
 
     return user_name
 

@@ -10,6 +10,7 @@ def do_post_request(user_id):
             print("<H1 id='user'>" + data["user_added"] + "</H1>")
         else:
             print("<H1 id='error'>id already exists " + str(user_id) + "</H1>")
+            print(res.json())
     except Exception as ex:
         print("<H1 id='error'>error: " + ex.__str__() + "</H1>")
 

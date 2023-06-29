@@ -1,7 +1,8 @@
 import os
 import signal
 from flask import Flask, request
-from Dal import db_connector
+
+#from Backend import db_connector
 
 app = Flask(__name__)
 
@@ -17,7 +18,8 @@ def user(user_id):
     if request.method == 'GET':
         # return {'user_id': user_id, 'user_name': users[user_id]}, 200 # status code
         try:
-            user_name = db_connector.get_user_name(user_id)
+            from db_connector import get_user_name
+            user_name = get_user_name(user_id)
             if user_name != "":
                 return {'status': 'ok', 'user_name': user_name}, 200  # status code
             else:
@@ -29,7 +31,8 @@ def user(user_id):
         try:
             request_data = request.json
             user_name = request_data.get('user_name')
-            user_name = db_connector.insert_user(user_id, user_name)
+            from db_connector import insert_user
+            user_name = insert_user(user_id, user_name)
             return {'status': 'ok', 'user_added': user_name}, 200  # status code
         except Exception as ex:
             return {'status': 'error', 'reason': 'id already exists ' + ex.__str__()}, 500  # status code
@@ -38,14 +41,16 @@ def user(user_id):
         try:
             request_data = request.json
             user_name = request_data.get('user_name')
-            user_name = db_connector.update_user(user_id, user_name)
+            from db_connector import update_user
+            user_name = update_user(user_id, user_name)
             return {'status': 'ok', 'user_updated': user_name}, 200  # status code
         except Exception as ex:
             return {'status': 'error', 'reason': 'no such id'}, 500  # status code
 
     elif request.method == 'DELETE':
         try:
-            user_id = db_connector.delete_user(user_id)
+            from db_connector import delete_user
+            user_id = delete_user(user_id)
             return {'status': 'ok', 'user_deleted': user_id}, 200  # status code
         except Exception as ex:
             return {'status': 'error', 'reason': 'no such id'}, 500  # status code

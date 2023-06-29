@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Set PYTHONPATH') {
             steps {
-                bat 'set PYTHONPATH=%WORKSPACE%\\CourseProject;%PYTHONPATH%'
+                bat 'set PYTHONPATH=%WORKSPACE%\\CourseProject\\Backend;%PYTHONPATH%'
             }
         }
         stage('Install dependencies') {
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     if (checkOs() == 'Windows') {
-                        bat 'start/min python Backend/rest_app.py'
+                        bat 'start/min python rest_app.py'
                     } else {
                         sh 'nohup python Backend/rest_app.py'
                     }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                      if (checkOs() == 'Windows') {
-                        bat 'python Test/backend_testing.py'
+                        bat 'python backend_testing.py'
                     } else {
                         sh 'python Test/backend_testing.py'
                     }

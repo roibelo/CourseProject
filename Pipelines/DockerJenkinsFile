@@ -4,6 +4,8 @@ pipeline {
         registry = "roibelo/my_repository"
         registryCredential = 'docker_hub'
         dockerImage = ''
+        dockerfilePath = "Backend/Dockerfile" // Path to the Dockerfile
+        tag = "v1.0.0" // Tag for the Docker image
         }
     stages {
         stage('Pull code') {
@@ -75,20 +77,16 @@ pipeline {
         stage('build and push image') {
             steps {
                 script {
-                    /*dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build("${registry}:${tag}", "-f ${dockerfilePath} .")
                     docker.withRegistry('', registryCredential) {
-                        dockerImage.push()
-                    }*/
-                    docker.build('roibelo/my_repository:${BUILD_NUMBER}')
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
                         dockerImage.push()
                     }
                 }
-            /*post {
+            }
+            post {
                 always {
-                    bat "docker rmi $registry:$BUILD_NUMBER"
+                    bat "docker rmi ${registry}:${tag}"
                 }
-            }*/
             }
         }
     }

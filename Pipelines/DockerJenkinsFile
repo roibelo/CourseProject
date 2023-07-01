@@ -78,9 +78,19 @@ pipeline {
             steps {
                 script {
                     dockerImage = docker.build("${registry}:${tag}", "-f ${dockerfilePath} .")
-                    docker.withRegistry('', registryCredential) {
+                    /*docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }*/
+
+                    dockerImage = docker.build("${registry}:${tag}", "-f ${dockerfilePath} .")
+                    /*docker.withRegistry('https://index.docker.io/v1/', [dockerLogin(credentialsId: 'docker_hub')]) {
+                        dockerImage.push()
+                    }*/
+
+                    docker.withRegistry([credentialsId: 'docker_hub', url: '']) {
                         dockerImage.push()
                     }
+
                 }
             }
             post {

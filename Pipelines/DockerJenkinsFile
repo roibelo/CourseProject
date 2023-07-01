@@ -83,12 +83,13 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
                         dockerImage.push()
                     }
-            }
+                }
             /*post {
                 always {
                     bat "docker rmi $registry:$BUILD_NUMBER"
                 }
             }*/
+            }
         }
     }
 }

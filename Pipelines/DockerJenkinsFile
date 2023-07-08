@@ -74,7 +74,7 @@ pipeline {
                 }
             }
         }
-        stage('build and push image') {
+        stage('Build Docker Image') {
             steps {
                 /*script {
                     dockerImage = docker.build("${registry}:${tag}", "-f ${dockerfilePath} .")
@@ -93,17 +93,33 @@ pipeline {
 
                 }*/
                  dir('Backend') {
-                    bat 'docker build -t project_course_image .'
-                    bat 'docker tag project_course_image roibelo/project_course_image'
+                    bat 'docker build -t project_course_image4 .'
+                    /*bat 'docker tag project_course_image roibelo/project_course_image'
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                         bat 'docker login -u %DOCKER_HUB_USERNAME% -p %DOCKER_HUB_PASSWORD%'
                         bat 'docker push roibelo/project_course_image'
-                    }
+                    }*/
                 }
             }
-            post {
+            /*post {
                 always {
                     bat "docker rmi ${registry}:${tag}"
+                }
+            }*/
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    // Log in to Docker Hub
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        bat 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    }
+
+                    // Tag Docker image for Docker Hub repository
+                    bat 'docker tag project_course_image4 roibelo/my_repository:v1.0.0'
+
+                    // Push Docker image to Docker Hub
+                    sh 'docker push roibelo/my_repository:v1.0.0'
                 }
             }
         }

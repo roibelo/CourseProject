@@ -92,11 +92,13 @@ pipeline {
                     }
 
                 }*/
-                bat 'docker build -t project_course_image .'
-                bat 'docker tag project_course_image roibelo/project_course_image'
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                    bat 'docker login -u %DOCKER_HUB_USERNAME% -p %DOCKER_HUB_PASSWORD%'
-                    bat 'docker push roibelo/project_course_image'
+                 dir('Backend') {
+                    bat 'docker build -t project_course_image .'
+                    bat 'docker tag project_course_image roibelo/project_course_image'
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                        bat 'docker login -u %DOCKER_HUB_USERNAME% -p %DOCKER_HUB_PASSWORD%'
+                        bat 'docker push roibelo/project_course_image'
+                    }
                 }
             }
             post {

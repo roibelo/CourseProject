@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         registry = "roibelo/my_repository"
-        registryCredential = 'docker_hub'
+        registryCredential = 'docker-hub'
         dockerImage = ''
         dockerfilePath = "Backend/Dockerfile" // Path to the Dockerfile
         tag = "v1.0.0" // Tag for the Docker image
@@ -111,7 +111,7 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub
-                    echo $DOCKERHUB_PASSWORD
+                    /*echo $DOCKERHUB_PASSWORD
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                         bat 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
                     }
@@ -120,7 +120,15 @@ pipeline {
                     bat 'docker tag project_course_image4 roibelo/my_repository:v1.0.0'
 
                     // Push Docker image to Docker Hub
-                    sh 'docker push roibelo/my_repository:v1.0.0'
+                    bat 'docker push roibelo/my_repository:v1.0.0'*/
+
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        bat '''
+                            echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+                            docker tag project_course_image4 roibelo/my_repository:v1.0.0
+                            docker push roibelo/my_repository:v1.0.0
+                        '''
+                    }
                 }
             }
         }

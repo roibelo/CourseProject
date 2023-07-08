@@ -81,24 +81,9 @@ pipeline {
                     docker.withRegistry('', registryCredential) {
                         dockerImage.push()
                     }
-
-                    dockerImage = docker.build("${registry}:${tag}", "-f ${dockerfilePath} .")
-                    docker.withRegistry('https://index.docker.io/v1/', [dockerLogin(credentialsId: 'docker_hub')]) {
-                        dockerImage.push()
-                    }
-
-                    docker.withRegistry([credentialsId: 'docker_hub', url: '']) {
-                        dockerImage.push()
-                    }
-
                 }*/
                  dir('Backend') {
                     bat 'docker build -t project_course_image4 .'
-                    /*bat 'docker tag project_course_image roibelo/project_course_image'
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                        bat 'docker login -u %DOCKER_HUB_USERNAME% -p %DOCKER_HUB_PASSWORD%'
-                        bat 'docker push roibelo/project_course_image'
-                    }*/
                 }
             }
             /*post {
@@ -110,24 +95,20 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Log in to Docker Hub
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                        bat 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD --password-stdin'
-                    }
-
-                    // Tag Docker image for Docker Hub repository
-                    bat 'docker tag project_course_image4 roibelo/my_repository:v1.0.0'
-
-                    // Push Docker image to Docker Hub
-                    bat 'docker push roibelo/my_repository:v1.0.0'
-
-                    /*withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                         bat '''
                             echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
                             docker tag project_course_image4 roibelo/my_repository:v1.0.0
                             docker push roibelo/my_repository:v1.0.0
                         '''
-                    }*/
+                    }
+                }
+            }
+        }
+        stage('Set Image Version') {
+            steps {
+                script {
+                    bat "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
                 }
             }
         }

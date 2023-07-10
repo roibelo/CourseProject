@@ -105,10 +105,47 @@ pipeline {
                 }
             }
         }
-        stage('Set Image Version') {
+        stage('Docker Compose-Up -d') {
             steps {
                 script {
-                    bat "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
+                    bat "docker-compose up -d"
+                }
+            }
+        }
+        stage('Wait for Docker compose') {
+            steps {
+                script {
+                    def isReady = false
+                    def maxRetries = 10
+                    def retries = 0
+
+                    while (!isReady && retries < maxRetries) {
+                        try {
+                            sh 'docker-compose ps'
+                            isReady = true
+                        } catch (Exception e) {
+                            retries++
+                            sleep(10) // Wait for 10 seconds before checking again
+                        }
+                    }
+
+                    if (!isReady) {
+                        error "Docker compose did not start within the specified time"
+                    }
+                }
+            }
+        }
+        stage('Test dockerized app') {
+            steps {
+                script {
+                    bat 'python Docker/docker_backend_testing.py'
+                }
+            }
+        }
+        stage('Clean environment') {
+            steps {
+                script {
+                    bat 'docker-compose down'
                 }
             }
         }

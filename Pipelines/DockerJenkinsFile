@@ -108,7 +108,9 @@ pipeline {
         stage('Docker Compose-Up -d') {
             steps {
                 script {
-                    bat "docker-compose up -d"
+                    dir('Backend') {
+                        bat "docker-compose up -d"
+                    }
                 }
             }
         }
@@ -121,7 +123,7 @@ pipeline {
 
                     while (!isReady && retries < maxRetries) {
                         try {
-                            sh 'docker-compose ps'
+                            bat 'docker-compose ps'
                             isReady = true
                         } catch (Exception e) {
                             retries++

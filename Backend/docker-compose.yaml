@@ -1,6 +1,6 @@
 version: '3'
 services:
   web:
-    image: "my_image"
+    image: "roibelo/my_repository:v1.0.0"
     ports:
     - "5000:5000"

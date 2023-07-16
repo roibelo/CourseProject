@@ -2,12 +2,14 @@ import datetime
 
 import pymysql
 
-schema_name = "sql8618285"
+schema_name = 'roibelodbb' #"sql8618285"
 
 
 def get_db_connection():
-    conn = pymysql.connect(host='sql8.freemysqlhosting.net', port=3306, user='sql8618285', passwd='LN5hipkRmA',
-                           db=schema_name)
+    #conn = pymysql.connect(host='sql8.freemysqlhosting.net', port=3306, user='sql8618285', passwd='LN5hipkRmA',
+    #                       db=schema_name)
+    conn = pymysql.connect(host='db', port=3306, user='roibelo', passwd='rrdkite1',
+                           database='roibelodb')
     conn.autocommit(True)
     return conn
 
@@ -32,7 +34,7 @@ def get_user_name(user_id):
         # Establishing a connection to DB
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT u.user_name FROM sql8618285.users as u where u.user_id=" + user_id + ";")
+        cursor.execute("SELECT u.user_name FROM roibelodb.users as u where u.user_id=" + user_id + ";")
         for row in cursor:
             user_name = row
 

@@ -31,8 +31,8 @@ def user(user_id):
         try:
             request_data = request.json
             user_name = request_data.get('user_name')
-            from db_connector import create_table
-            create_table()
+            #from db_connector import create_table
+            #create_table()
             from db_connector import insert_user
             user_name = insert_user(user_id, user_name)
             return {'status': 'ok', 'user_added': user_name}, 200  # status code

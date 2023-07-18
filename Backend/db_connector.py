@@ -57,7 +57,7 @@ def insert_user(user_id, user_name):
         cursor = conn.cursor()
         # Inserting data into table
         cursor.execute(
-              "INSERT into sql8618285.users (user_id, user_name, creation_date) VALUES (" + user_id + ", '" + user_name +
+              "INSERT into roibelodb.users (user_id, user_name, creation_date) VALUES (" + user_id + ", '" + user_name +
               "','" + str(datetime.datetime.now()) + "')")
     except Exception as ex:
         raise Exception("insertUser function error: " + ex.__str__())
@@ -76,7 +76,7 @@ def update_user(user_id, user_name):
         # Getting a cursor from Database
         cursor = conn.cursor()
         # Inserting data into table
-        cursor.execute("update sql8618285.users set user_name = '" + user_name + "' where user_id = " + user_id)
+        cursor.execute("update roibelodb.users set user_name = '" + user_name + "' where user_id = " + user_id)
 
     except Exception as ex:
         raise Exception("updateUser function error: " + ex.__str__())
@@ -95,7 +95,7 @@ def delete_user(user_id):
         # Getting a cursor from Database
         cursor = conn.cursor()
         # Inserting data into table
-        cursor.execute("delete from sql8618285.users where user_id = " + user_id)
+        cursor.execute("delete from roibelodb.users where user_id = " + user_id)
 
     except Exception as ex:
         raise Exception("deleteUser function error: " + ex.__str__())

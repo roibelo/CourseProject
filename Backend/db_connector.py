@@ -9,7 +9,7 @@ def get_db_connection():
     #conn = pymysql.connect(host='sql8.freemysqlhosting.net', port=3306, user='sql8618285', passwd='LN5hipkRmA',
     #                       db=schema_name)
     conn = pymysql.connect(host='db', port=3306, user='roibelo', passwd='rrdkite1',
-                           database='roibelodb')
+                           database='roibelodb', connect_timeout=20)
     conn.autocommit(True)
     return conn
 

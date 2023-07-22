@@ -24,12 +24,12 @@ def do_get_request(user_id):
             if data["user_name"][0] == "John":
                 print("<H1 id='user'>" + data["user_name"][0] + "</H1>")
             else:
-                print("the value from the api is different from 'John'")
+                print("the value from the api is different from 'John'. the value is: " + data["user_name"][0])
         else:
             print("<H1 id='error'>no such user " + str(user_id) + "</H1>")
     except Exception as ex:
         print("<H1 id='error'>error: " + ex.__str__() + "</H1>")
 
-
-do_post_request(1000)
 do_get_request(1000)
+#do_post_request(1000)
+#do_get_request(1000)

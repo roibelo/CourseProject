@@ -26,7 +26,7 @@ def do_get_request(user_id):
             else:
                 print("the value from the api is different from 'John'. the value is: " + data["user_name"][0])
         else:
-            print("<H1 id='error'>no such user " + str(user_id) + ". the value is: " + res +"</H1>")
+            print("<H1 id='error'>no such user " + str(user_id) + ". the value is: " + res.__str__() +"</H1>")
     except Exception as ex:
         print("<H1 id='error'>error: " + ex.__str__() + "</H1>")
 
